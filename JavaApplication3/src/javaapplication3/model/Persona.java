@@ -8,8 +8,6 @@ abstract class Persona {
 
     private String apellido;
 
-    private String tipoDocumento;
-    
     private String numDocumento;
 
     private String telefono;
@@ -23,7 +21,6 @@ abstract class Persona {
         this.idPersona = idPersona;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.tipoDocumento = tipoDocumento;
         this.numDocumento = numDocumento;
         this.telefono = telefono;
         this.email = email;
@@ -51,14 +48,6 @@ abstract class Persona {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
-    }
-
-    public String getTipoDocumento() {
-        return tipoDocumento;
-    }
-
-    public void setTipoDocumento(String tipoDocumento) {
-        this.tipoDocumento = tipoDocumento;
     }
 
     public String getNumDocumento() {

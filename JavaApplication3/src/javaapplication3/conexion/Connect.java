@@ -18,7 +18,7 @@ public class Connect {
         try  {
             Class.forName(driver);
             cx= DriverManager.getConnection(url, usuario, contraseña);
-            System.out.println("Conexión exitosa a la base de datos");
+            System.out.println("Conexión exitosa a la base de datos"+url);
             // Aquí puedes realizar operaciones con la base de datos
         } catch (SQLException e) {
             System.out.println("Error al conectar a la base de datos: " + e.getMessage());

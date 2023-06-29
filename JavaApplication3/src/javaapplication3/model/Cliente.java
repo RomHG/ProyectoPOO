@@ -37,8 +37,5 @@ public class Cliente extends Persona {
     public void setCodCliente(String codCliente) {
         this.codCliente = codCliente;
     }
-
-    public long getId() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }
+        

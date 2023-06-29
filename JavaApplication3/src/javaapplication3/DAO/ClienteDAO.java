@@ -149,8 +149,58 @@ public class ClienteDAO implements CrudDAO<Cliente, Integer> {
     }
 
     @Override
-    public void delete(Cliente entity) {
-      /* String deleteQuery = "DELETE FROM cliente WHERE id = ?";*/
+    public void delete(Long id) {
+        
+        String deleteQuery = "DELETE FROM clientes WHERE persona_id = ?";
+        String deleteQuery2 = "DELETE FROM personas WHERE id_persona = ?";
+        
+        try  {
+            PreparedStatement statement = connection.prepareStatement(deleteQuery);
+            PreparedStatement statement2 = connection.prepareStatement(deleteQuery2);
+            
+            statement.setLong(1, id);
+            statement2.setLong(1, id);
+            
+            int n = statement.executeUpdate();
+             int n2 = statement2.executeUpdate();
+            
+            if(n!=0 && n2!=0){
+                System.out.println("Exito al eliminar "+id );
+            }else{
+                System.out.println("Error al eliminar "+id);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }    
     }
+    
+    public Cliente findByDni(String dni) {
+       Cliente cliente = null;
+       String query = "SELECT * FROM personas INNER JOIN clientes ON personas.id_persona = clientes.persona_id WHERE personas.DNI = ?";
+        
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, dni);
+            
+            ResultSet resultSet = statement.executeQuery();
+            
+            if (resultSet.next()) {
+                cliente = new Cliente();
+                cliente.setIdPersona(resultSet.getInt("persona_id"));
+                cliente.setCodCliente(resultSet.getString("cod_cliente"));
+                cliente.setNombre(resultSet.getString("nombre"));
+                cliente.setApellido(resultSet.getString("apellidos"));
+                cliente.setNumDocumento(resultSet.getString("DNI"));
+                cliente.setTelefono(resultSet.getString("telefono"));
+                cliente.setEmail(resultSet.getString("email"));
+                // Obtener otros campos de la tabla personas si es necesario
+                System.out.println("Se realizo la busqueda correctamente del cliente: "+ cliente.getNombre());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return cliente;
+    }
+
     
 }
